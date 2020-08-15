@@ -12,6 +12,7 @@
 
 <h2> Identical Part of Each Packet </h2>
 Packet Sturcture : Ethernet - IP - TCP - HTTP/SMTP/FTP...etc <br>
+<br>
 Each Layer's info : Layer Type, Total Data, Layer Data, Layer Payload <br>
 &nbsp;&nbsp;&nbsp;Ethernet - Src Mac Address, Dst Mac Address <br>
 &nbsp;&nbsp;&nbsp;IP - Src IP Address, Dst IP Address, IP ID <br>
