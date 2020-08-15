@@ -1,4 +1,4 @@
-# 2020_BoB_NetworkMajor
+# 2020_BoB_NetworkMajor_서예진, 이수진, 김경환 (9-2조)
 
 <h2> WBS </h2>
 <div>
