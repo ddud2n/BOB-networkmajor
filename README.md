@@ -1,5 +1,10 @@
 # 2020_BoB_NetworkMajor
 
+<h2> WBS </h2>
+<div>
+  <img width = "800" src = "https://user-images.githubusercontent.com/58834907/90305123-109aeb80-defa-11ea-961a-6907a66d9c48.jpg">
+  </div>
+
 <h2> Terminal Command </h2>
 <div>
 <img width = "700" src = "https://user-images.githubusercontent.com/58834907/90235811-dd564f00-de5c-11ea-91c0-e82e561f28d8.PNG" >
