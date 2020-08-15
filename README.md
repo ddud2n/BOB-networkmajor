@@ -13,9 +13,9 @@
 <h2> Identical Part of Each Packet </h2>
 Packet Sturcture : Ethernet - IP - TCP - HTTP/SMTP/FTP...etc <br>
 Each Layer's info : Layer Type, Total Data, Layer Data, Layer Payload <br>
-                    Ethernet - Src Mac Address, Dst Mac Address <br>
-                    IP - Src IP Address, Dst IP Address, IP ID <br>
-                    TCP - Src Port, Window size, TCP flags, TCP Sequence Num, TCP Ack Num <br>
+&nbsp;&nbsp;&nbsp;Ethernet - Src Mac Address, Dst Mac Address <br>
+&nbsp;&nbsp;&nbsp;IP - Src IP Address, Dst IP Address, IP ID <br>
+&nbsp;&nbsp;&nbsp;TCP - Src Port, Window size, TCP flags, TCP Sequence Num, TCP Ack Num <br>
 
 <h2> Case 1 : HTTP Pcap File Open </h2>
 HTTP packet's info : method, URI, host, user-agent, cookie, URL <br>
