@@ -14,6 +14,9 @@
 #include "RawPacket.h"
 #include <bits/stdc++.h>
 #include "json/json.h"
+#include <unistd.h>   
+#include <sys/stat.h>
+#include <errno.h>      
 
 using namespace std;
 
@@ -109,6 +112,9 @@ uint8_t my_ntohs(uint8_t n) {
 int main(int argc, char* argv[]) {
 
    char* filename = argv[1];
+   int ftpResult = mkdir( "FTP_directory" , 0777);
+   int smtpResult = mkdir( "SMTP_directory" , 0777);
+   int httpResult = mkdir( "HTTP_directory" , 0777);
 
    // use the IFileReaderDevice interface to automatically identify file type (pcap/pcap-ng)
    // and create an interface instance that both readers implement
@@ -318,14 +324,10 @@ int main(int argc, char* argv[]) {
                            }
                         }
 
-                        printf("\n\n HERE SMTP DATA FILE \n");
-
-                        for(int j = 0; j < smtp_data_file_idx ; j++){
-                           printf("%c", smtp_data_file[j]);
-                        }  
-
                         //첨부된 파일을 형식에 맞게 추출. 파일 이름에 .dat와 같은 식으로 명시되어 있음.
-                        FILE * file = fopen(filename_smtp, "wb");
+                        char smtp_file_path[111111] = "SMTP_directory/";
+                        strcat(smtp_file_path, filename_smtp);
+                        FILE * file = fopen(smtp_file_path, "wb");
                         fwrite (smtp_data_file, sizeof(smtp_data_file), 1, file);
                         fclose (file);
 
@@ -450,7 +452,9 @@ int main(int argc, char* argv[]) {
                
                   // 추출한 데이터를 파일로 저장
                   ofstream myfile;
-                  myfile.open(ftp_request_arg, ios::binary);
+                  string ftp_file_path = "FTP_directory/";
+                  ftp_file_path = ftp_file_path + ftp_request_arg;
+                  myfile.open(ftp_file_path, ios::binary);
                   myfile.write((const char*) ftp_data, ftp_data_size);
                   myfile.close();
                   memset(ftp_data, 0, sizeof(ftp_data));
@@ -643,7 +647,9 @@ int main(int argc, char* argv[]) {
                //HTTP 에서 추출한 데이터 파일 형태로 추출
                if (http_get_data_port[i].first == src_port) {
                   ofstream file;
-                  file.open(http_get_data_port[i].second, ios::binary);
+                  string http_file_path = "HTTP_directory/";
+                  http_file_path = http_file_path+ http_get_data_port[i].second;
+                  file.open(http_file_path, ios::binary);
                   file.write((const char*) http_data[i], http_data_idx[i]);
                   file.close();
                   memset(http_data[i], 0, sizeof(http_data[i]));
@@ -676,15 +682,23 @@ int main(int argc, char* argv[]) {
    */
 
   //JSON 쓰기
-   std::ofstream ftpFile("log_ftp.json", ios::out);
+   char ftp_file_path[111111] = "FTP_directory/";
+   strcat(ftp_file_path, "log_ftp.json");
+   std::ofstream ftpFile(ftp_file_path, ios::out);
    ftpFile << root;
    ftpFile.close();
 
-   std::ofstream httpFile("log_http.json", ios::out);
+
+   char http_file_path[111111] = "HTTP_directory/";
+   strcat(http_file_path, "log_http.json");
+   std::ofstream httpFile(http_file_path, ios::out);
    httpFile << http;
    httpFile.close();
 
-   std::ofstream smtpFile("log_smtp.json", ios::out);
+
+   char smtp_file_path[111111] = "SMTP_directory/";
+   strcat(smtp_file_path, "log_smtp.json");
+   std::ofstream smtpFile(smtp_file_path, ios::out);
    smtpFile << smtp;
    smtpFile.close();
 
